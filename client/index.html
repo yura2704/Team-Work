@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>AJAX / NodeJS</title>
+
 </head>
 <body>
-
+  <main>
+        <button type="button" onclick="loadPosts()">Download users info</button>
+    <script>
+      const hostName = 'http://localhost:3000/users'
+      async function loadPosts() {
+      const response = await fetch (hostName)
+      const users = await response.json ()
+      console.log(users)
+      let usersToHtml = ""
+      users.forEach(user =>  {
+        usersToHtml += `<div id="user${user.id}">`
+        usersToHtml += `<h1>User id: ${user.id}</h1>`
+        usersToHtml += `<p>first_name: ${user.first_name}</p>`
+        usersToHtml += `<p>Lastname:  ${user.last_name}</p>`
+        usersToHtml += `<p>Email: ${user.email}</p>`
+        usersToHtml += `<img src="${user.photo}"/>`
+        usersToHtml += `</div>`
+      });
+      document.body.insertAdjacentHTML ('beforeend', usersToHtml)
+}
+    </script>
+</main>   
 </body>
 </html>
