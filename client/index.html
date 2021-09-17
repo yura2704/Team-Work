@@ -13,7 +13,6 @@
       async function loadPosts() {
       const response = await fetch (hostName)
       const users = await response.json ()
-      console.log(users)
       let usersToHtml = ""
       users.forEach(user =>  {
         usersToHtml += `<div id="user${user.id}">`
